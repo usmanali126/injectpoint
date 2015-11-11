@@ -33,16 +33,17 @@ if (isset($_POST['id'])) {
     exit;
 }
 
-if(isset($_POST['mcard'])){
+if (isset($_POST['mcard'])) {
     $obj = new inject_record();
-    $result = $obj->get_info($_POST['mcard']);
-    while($row= mysqli_fetch_array($result)){
-        $data=array($row['m_card'],$row['m_name'],$row['father_name'],$row['cell_number'],$row['concile_id'],$row['area_id'],$row['address']);
+    $data = array("card" => $_POST['mcard'], "card_column" => "m_card");
+    $result = $obj->get_info($data);
+    while ($row = mysqli_fetch_array($result)) {
+        $data = array($row['m_card'], $row['m_name'], $row['father_name'], $row['cell_number'], $row['concile_id'], $row['area_id'], $row['address']);
     }
-    if(is_null($data)){
+    if (is_null($data)) {
         $result = array('Not Avail able');
         echo json_encode($result);
-    }else{
+    } else {
         echo json_encode($data);
     }
     exit;
@@ -86,20 +87,20 @@ class inject_record {
     function add_card($data, $token) {
         //print_r($data);
         //exit();
-        $date=  date('d-m-Y');
+        $date = date('d-m-Y');
         $link = $this->db_connection();
         //echo $date;
         //exit();
         switch ($token) {
             case 0:
-                $query = "INSERT INTO information (`concile_id`, `area_id`, `m_card`, `m_name`, `father_name`, `address`, `cell_number`, `edd`, `create_date`)VALUES('".$data['union']."','".$data['area']."','".$data['mcard_number']."','".$data['wname']."','".$data['hname']."','".$data['address']."','".$data['cell']."','".$data['edd']."','$date')";
+                $query = "INSERT INTO information (`concile_id`, `area_id`, `m_card`, `m_name`, `father_name`, `address`, `cell_number`, `edd`, `create_date`)VALUES('" . $data['union'] . "','" . $data['area'] . "','" . $data['mcard_number'] . "','" . $data['wname'] . "','" . $data['hname'] . "','" . $data['address'] . "','" . $data['cell'] . "','" . $data['edd'] . "','$date')";
                 break;
             case 1:
                 $query = "INSERT INTO information (`concile_id`, `area_id`, `card_number`, `name`, `father_name`, `m_name`, `address`, `cell_number`, `dob` , `create_date`)VALUES"
-                    . "('".$data['union']."','".$data['area']."','".$data['card_number']."','".$data['name']."','".$data['fname']."','".$data['wname']."','".$data['address']."','".$data['cell']."','".$data['dob']."','$date')";
+                        . "('" . $data['union'] . "','" . $data['area'] . "','" . $data['card_number'] . "','" . $data['name'] . "','" . $data['fname'] . "','" . $data['wname'] . "','" . $data['address'] . "','" . $data['cell'] . "','" . $data['dob'] . "','$date')";
                 break;
             case 2:
-                $query = "UPDATE information SET `card_number`='".$data['card_number']."',`name`='".$data['name']."',`dob`='".$data['dob']."' WHERE `m_card`='".$data['mcard_number']."'";
+                $query = "UPDATE information SET `card_number`='" . $data['card_number'] . "',`name`='" . $data['name'] . "',`dob`='" . $data['dob'] . "' WHERE `m_card`='" . $data['mcard_number'] . "'";
                 break;
         }
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
@@ -111,74 +112,65 @@ class inject_record {
     }
 
     function get_info($card) {
-        //print_r($card);
-        //exit();
-      //$card=$_POST['card_number'];
-      $link=  $this->db_connection();
-      //if(isset($card['token']) && $card['token'] == TRUE){
-          if(isset($card['token'])){
-          $card=$card['card'];
-          $query="SELECT * FROM information WHERE card_number='$card'";
-      }else{
-          //$card=$card['card'];
-         $query="SELECT * FROM information WHERE m_card='$card'"; 
-      }
-      
-      $result=  mysqli_query($link, $query) or die(mysqli_error($link));
-      if($result==TRUE){
-          return $result;
-      }  else {
-          return'Record Not Found';
-      }
+        // print_r($card);
+        $column = $card['card_column'];
+        $card = $card['card'];
+
+        $link = $this->db_connection();
+        $query = "SELECT * FROM information WHERE $column='$card'";
+        $result = mysqli_query($link, $query) or die(mysqli_error($link));
+        if ($result == TRUE) {
+            return $result;
+        } else {
+            return'Record Not Found';
+        }
     }
-    
+
     function update_injection($parm) {
-        $link=  $this->db_connection();
-        
-        $card=$parm[0];
-        $index=$parm[1];
-        $date=$parm[2];
-        $card_column=$parm[3];
+        $link = $this->db_connection();
+
+        $card = $parm[0];
+        $index = $parm[1];
+        $date = $parm[2];
+        $card_column = $parm[3];
         //print_r($parm);
         //exit();
-        
-        $query="UPDATE `information` SET `$index`='$date' WHERE `$card_column`='$card' ";
-        
-        $result=  mysqli_query($link, $query) or die(mysqli_error($link));
-        if($result==TRUE){
+
+        $query = "UPDATE `information` SET `$index`='$date' WHERE `$card_column`='$card' ";
+
+        $result = mysqli_query($link, $query) or die(mysqli_error($link));
+        if ($result == TRUE) {
             return TRUE;
-        }else{
+        } else {
             return FALSE;
         }
-        
     }
-    
-    function report(){
-        $link=  $this->db_connection();
-        $date=$_POST['date'];
-        $query="SELECT * FROM information WHERE 1_inj='$date' OR 2_inj='$date' OR 3_inj='$date' OR 4_inj='$date' OR 5_inj='$date' OR 6_inj='$date' ";
-        $result=  mysqli_query($link, $query) or die(mysqli_error($link));
-        if($result == TRUE){
+
+    function report() {
+        $link = $this->db_connection();
+        $date = $_POST['date'];
+        $query = "SELECT * FROM information WHERE 1_inj='$date' OR 2_inj='$date' OR 3_inj='$date' OR 4_inj='$date' OR 5_inj='$date' OR 6_inj='$date' ";
+        $result = mysqli_query($link, $query) or die(mysqli_error($link));
+        if ($result == TRUE) {
             return $result;
-        }else{
+        } else {
             return 'Not Found';
         }
-        
     }
-    
-    function report_by_area(){
-       $link=  $this->db_connection();
-        $uc=$_POST['union'];
-        $area=$_POST['area'];
-        $query="SELECT * FROM information WHERE concile_id='$uc' AND area_id='$area' ";
-        $result=  mysqli_query($link, $query) or die(mysqli_error($link));
-        if($result == TRUE){
+
+    function report_by_area() {
+        $link = $this->db_connection();
+        $uc = $_POST['union'];
+        $area = $_POST['area'];
+        $query = "SELECT * FROM information WHERE concile_id='$uc' AND area_id='$area' ";
+        $result = mysqli_query($link, $query) or die(mysqli_error($link));
+        if ($result == TRUE) {
             return $result;
-        }else{
+        } else {
             return 'Not Found';
-        } 
+        }
     }
-            
+
     function add_uc() {
         $link = $this->db_connection();
         $name = $_POST['uc_name'];

@@ -10,11 +10,12 @@ if (isset($_POST['search'])) {
         $error = 'Write Mother or Child card number in search field.';
     } else {
         if (isset($_POST['mcard_number'])) {
-            $data = array("card" => $_POST['card_number'], "token" => FALSE);
+            $data = array("card" => $_POST['card_number'], "card_column" => "m_card");
         } else {
-            $data = array("card" => $_POST['card_number'], "token" => TRUE);
+            $data = array("card" => $_POST['card_number'], "card_column" => "card_number");
         }
-
+        //echo $data['card_column'];
+        //exit();
         $obj = new inject_record();
         $result = $obj->get_info($data);
         $row = mysqli_fetch_array($result);
