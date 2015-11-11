@@ -155,4 +155,5 @@ and open the template in the editor.
     </body>
     <?php require 'inc/footer.php'; ?>
 </html>
+
 <!--http://stackoverflow.com/questions/2040560/finding-the-number-of-days-between-two-dates-->
