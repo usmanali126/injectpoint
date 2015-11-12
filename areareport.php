@@ -83,7 +83,7 @@ and open the template in the editor.
                                     <thead class="table-bordered">
                                         <!--<tr><th class="col-xs-1">Sr.</th><th class="col-xs-1">Card #</th><th class="col-xs-1">Name</th><th class="col-xs-1">Date of birth</th><th class="col-xs-1">Uc.</th><th class="col-xs-1">Area</th><th class="col-xs-1">Inj-1</th><th class="col-xs-1">Inj-2</th><th class="col-xs-1">Inj-3</th><th class="col-xs-1">Inj-4</th><th class="col-xs-1">Inj-5</th><th class="col-xs-1">Inj-6</th></tr>-->
                                         <?php if (isset($result)) { ?>
-                                            <tr><th >Sr.</th><th >Card #</th><th >Name</th><th >Date of birth</th><th >Age(Days)</th><th >OPV 0-40</th><th >IPV 106-270</th><th class="col-xs-1">BCG 0-40</th><th >P1 46-75</th><th >P2 76-105</th><th >P3 106-270</th><th >M1 271-540</th><th >M2 540---</th></tr>
+                                        <tr><th >Sr.</th><th >Card #</th><th >Name</th><th >Date of birth</th><th >Age(Days)</th><th >OPV 0-40</th><th >IPV 106-270</th><th >BCG 0-40</th><th >P1 46-75</th><th >P2 76-105</th><th >P3 106-270</th><th >M1 271-540</th><th >M2 540---</th><th>In Date</th><th>Over Date</th></tr>
                                         <?php } ?>
                                     </thead>
                                     <tbody class="resutl">
