@@ -34,24 +34,20 @@
             <li><a href="report.php">Date wise report</a></li>
             <li><a href="areareport.php">Area wise report</a></li>
           </ul></li>
-      </ul>
-      <form class="navbar-form navbar-left pull-right" role="search" id="hsearch" action="record.php" method="POST">
+     </ul>
+    <!--      <ul class="nav navbar-nav navbar-left pull-right">
+            <li><a href="index.php">LogOut</a></li>
+        </ul>-->
+      <form class="navbar-form navbar-left " role="search" id="hsearch" action="record.php" method="POST">
         <div class="form-group">
           <input type="text" form="hsearch" name="card_number" class="form-control" id="card_number" placeholder="Card Number">
         </div>
         <button type="submit" form="hsearch" name="search" class="btn btn-primary">Search</button>
       </form>
-    <?php /*  <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul> */?>
+       
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="index.php">Log Out</a></li>
+        </ul> 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

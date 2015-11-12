@@ -71,10 +71,12 @@ class inject_record {
             //print_r($result);
 //           if($result[0]==$pass){
             if (password_verify($pass, $result[0])) {
-                session_start();
+                //session_start();
+               echo $_SESSION['name'] = $result[2];
                 $_SESSION['type'] = $result[1];
-                $_SESSION['name'] = $result[2];
-                //echo $_SESSION['type'].'<br>'.$_SESSION['name']=$result[2];
+                
+                //echo $_SESSION['type'].'<br>'.$_SESSION['name'];
+                exit();
                 header("Location:card.php");
             } else {
                 return $error = TRUE;
@@ -223,6 +225,9 @@ class inject_record {
 
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
         return $result;
+    }
+    function logout(){
+        
     }
 
 }

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <meta charset="UTF-8">
         <!-- Bootstrap -->
         <link href="inc/css/bootstrap.css" rel="stylesheet" type="text/css"/>

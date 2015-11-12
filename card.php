@@ -1,5 +1,6 @@
 <?php
 require_once 'classes/inject_record.php';
+
 if (isset($_POST['submit']) || isset($_POST['submit1'])) {
     //print_r($_POST);
     $data='';
@@ -58,7 +59,13 @@ and open the template in the editor.
     <body>
         <!--<div class="container">-->
         <div id="nav" >
-            <?php require 'inc/header.php'; ?>
+            <?php 
+            require 'inc/header.php'; 
+            echo $_SESSION['name'].'<br>'.$_SESSION['type'];
+            if(empty($_SESSION['name'])){
+                echo 'empty';
+            }
+?>
         </div>
 
         <div id="dashoard" class="container">
