@@ -1,6 +1,8 @@
 <?php
 require_once 'classes/inject_record.php';
-
+if(!isset($_SESSION['name'])){
+    header('Location:index.php?login=login');
+}
 if (isset($_POST['submit']) || isset($_POST['submit1'])) {
     //print_r($_POST);
     $data='';
@@ -61,14 +63,14 @@ and open the template in the editor.
         <div id="nav" >
             <?php 
             require 'inc/header.php'; 
-            //echo $_SESSION['name'].'<br>'.$_SESSION['type'];
-            echo session_status();
-            print_r($_SESSION);
-            if(empty($_SESSION['name'])){
-                echo 'empty';
-            }else{
-                echo 'not empty';
-            }
+//            echo $_SESSION['type'].'<br>'.$_SESSION['name'];
+//            echo session_status();
+//            //print_r($_SESSION);
+//            if(empty($_SESSION['name'])){
+//                echo 'empty';
+//            }else{
+//                echo 'not empty';
+//            }
 ?>
         </div>
 

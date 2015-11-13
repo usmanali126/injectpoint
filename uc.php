@@ -1,5 +1,8 @@
 <?php
 require_once 'classes/inject_record.php';
+if(!isset($_SESSION['name'])){
+    header('Location:index.php?login=login');
+}
 if (isset($_POST['submit'])) {
     //print_r($_POST);
     $obj = new inject_record();

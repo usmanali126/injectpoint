@@ -18,7 +18,7 @@ require_once 'connection.php';
 //    echo json_encode($result);
 //    exit;
 //}
-session_start();
+//session_start();
 if (isset($_POST['id'])) {
     $obj = new inject_record();
     $result = $obj->get_area($_POST['id']);
@@ -73,8 +73,9 @@ class inject_record {
 //           if($result[0]==$pass){
             if (password_verify($pass, $result[0])) {
                 //session_start();
-                $_SESSION['name'] = $result[2];
                 $_SESSION['type'] = $result[1];
+                $_SESSION['name'] = $result[2];
+                //$_SESSION['type'] = $result[1];
                 print_r($_SESSION);
                 if(is_null($_SESSION['name'])){
                     echo 'this is null';
@@ -151,7 +152,7 @@ class inject_record {
         if ($result == TRUE) {
             return TRUE;
         } else {
-            return FALSE;
+            return TRUE;
         }
     }
 
@@ -235,6 +236,7 @@ class inject_record {
     }
     function logout(){
         session_destroy();
+        $_GET['logout']=NULL;
         return TRUE;
     }
 

@@ -42,9 +42,12 @@ $(".resutl tr").each(function(){
     //console.log(date1);
     //console.log(days);
         if(days>0){
-            if(days>=540){
+            if(days>=940){
             $(this).addClass("over");
             over_date++;
+            }else if(days>=540){
+           $(this).addClass("over");
+           over_date++;
             }else if(days>=270){
            $(this).addClass("over");
            over_date++;
@@ -52,9 +55,6 @@ $(".resutl tr").each(function(){
            $(this).addClass("over");
            over_date++;
             }else if(days>=75){
-           $(this).addClass("over");
-           over_date++;
-            }else if(days>=45){
            $(this).addClass("over");
            over_date++;
             }else if(days>=40){

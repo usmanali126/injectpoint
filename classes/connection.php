@@ -11,7 +11,7 @@
  *
  * @author penguin
  */
-//session_start();
+session_start();
 class connection {
     function db_connect(){
         $connection=  mysqli_connect('localhost', 'root', '', 'inject_point');

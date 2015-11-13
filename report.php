@@ -1,5 +1,8 @@
 <?php
 require 'classes/inject_record.php';
+if(!isset($_SESSION['name'])){
+    header('Location:index.php?login=login');
+}
 if (isset($_POST['date_search'])) {
     $obj = new inject_record();
     $result = $obj->report();

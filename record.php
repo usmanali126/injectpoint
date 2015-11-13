@@ -1,5 +1,8 @@
 <?php
 require 'classes/inject_record.php';
+if(!isset($_SESSION['name'])){
+    header('Location:index.php?login=login');
+}
 if (isset($_POST['card'])) {
     //echo $_POST['card'];
 }
@@ -46,19 +49,26 @@ if (isset($_POST['update'])) {
         $index='tt'.$index;
         $card_column='m_card';
     } else {
-        $arr_size_opv = sizeof($_POST['odate']);
+        $arr_size_opv = sizeof(isset($_POST['odate']));
+        print_r($_POST['odate']);
+        echo $arr_size_opv;
         switch ($arr_size_opv) {
             case 2:
-                $index = 1;
-                $token=TRUE;
+                $index_odate = 1;
+                if(!empty($_POST['odate'][0])){
+                   $token=TRUE; 
+                }
                 break;
 
             default:
-                $index = 2;
-                $token=TRUE;
+                $index_odate = 2;
+                if(!empty($_POST['odate'][0])){
+                   $token=TRUE; 
+                }
                 break;
         }
         //$_POST['mcard_number']=NULL;
+        //echo $arr_size;
         //exit();
         switch ($arr_size) {
             case 5:
@@ -83,18 +93,26 @@ if (isset($_POST['update'])) {
         }
         //$token='unset';
         
-        if($token==TRUE){
-            $index='opv'.$index;
+        if(isset($token) && $token==TRUE){
+            $index='opv'.$index_odate;
         }else{
             $index=$index.'_inj';
         }
         $card_column='card_number';
     }
+//    echo $index.'<br>';
+//    echo $card_column;
+    exit();
 //    print_r($_POST);
     $i = 0;
     while ($i < $arr_size) {
-        if (!empty($_POST['date'][$i])) {
-            $parm = array($_POST['card_number'], $index, $_POST['date'][$i], $card_column);
+        if (!empty($_POST['date'][$i]) || !empty($_POST['odate'][$i])) {
+            if(!empty($_POST['date'][$i])){
+                $date=$_POST['date'][$i];
+            }else{
+                $date=$_POST['odate'][$i];
+            }
+            $parm = array($_POST['card_number'], $index, $date, $card_column);
             $obj = new inject_record();
             $result = $obj->update_injection($parm);
             break;
@@ -103,8 +121,9 @@ if (isset($_POST['update'])) {
         }
         $i++;
     }
-    if ($result == TRUE) {
-        $data = array("card" => $_POST['card_number'], "token" => TRUE);
+    //exit();
+    if (isset($result) && $result == TRUE) {
+        $data = array("card" => $_POST['card_number'], "card_column" => $card_column);
         $obj = new inject_record();
         $result = $obj->get_info($data);
         $row = mysqli_fetch_array($result);
@@ -144,24 +163,29 @@ and open the template in the editor.
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form class="form-inline pull-right" id="search" action="" method="POST">
+                                <div class=" pull-right">
+                                <form class=" form-inline" id="search" action="" method="POST">
                                     <div class="form-group">
-                                        <label for="mcard_number">Mother Card Number</label>
-                                        <input type="checkbox" form="search" name="mcard_number" class="form-control" id="mcard_number" placeholder="Card Number">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="card_number">Enter Card Number</label>
+                                        <label for="card_number">Card Number</label>
                                         <input type="text" form="search" name="card_number" class="form-control" id="card_number" placeholder="Card Number">
                                     </div>
-                                    <button type="submit" form="search" name="search" class="btn btn-primary">Search</button>
-                                    <h4 class="danger"><?php
+                                    <button type="submit" form="search" name="search" class="btn btn-primary ">Search</button>
+                                </form>
+                                </div>
+                                <div class="form-group">
+                                        <h4 class="text-danger"><?php
                                         if (isset($error)) {
                                             echo $error;
                                         }
                                        // echo $_POST['mcard_number'];
                                         
                                         ?></h4>
-                                </form>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group checkbox pull-right">
+                                        <label for="mcard_number"><input type="checkbox" form="search" name="mcard_number" class="" id="mcard_number" placeholder="Card Number">Mother Card Number </label>
+                                </div>
                             </div>
                         </div>
 
@@ -338,7 +362,7 @@ and open the template in the editor.
                                                 echo '<input class="inject_date date-picker" form="injection" name="odate[]" placeholder="Date"></input>';
                                             }
                                             ?></div></div>
-                                    <div class="col-sm-2"><div class="bold">OPV2 41-45</div><div><?php
+                                    <div class="col-sm-2"><div class="bold">OPV2 106-270</div><div><?php
                                             if (isset($row) && !(empty($row[21]))) {
                                                 echo $row[21];
                                             } else {
