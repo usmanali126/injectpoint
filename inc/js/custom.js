@@ -32,6 +32,8 @@ $(document).ready(function () {
     
     
 $(".resutl tr").each(function(){
+    var in_date=0;
+    var over_date=0;
    var date1= $(this).children(".date1").text();
     $(this).find(".date2").each(function(){
 	var date2=$(this).text();
@@ -40,15 +42,35 @@ $(".resutl tr").each(function(){
     //console.log(date1);
     //console.log(days);
         if(days>0){
-            if(days>=44){
+            if(days>=540){
             $(this).addClass("over");
+            over_date++;
+            }else if(days>=270){
+           $(this).addClass("over");
+           over_date++;
+            }else if(days>=105){
+           $(this).addClass("over");
+           over_date++;
+            }else if(days>=75){
+           $(this).addClass("over");
+           over_date++;
+            }else if(days>=45){
+           $(this).addClass("over");
+           over_date++;
             }else if(days>=40){
            $(this).addClass("over");
+           over_date++;
             }else{
                  $(this).addClass("under");
+                 in_date++;
             }
         }
+        
     });
+    console.log(in_date);
+    console.log(over_date);
+    $(this).children(".indate").text(in_date).addClass("under");
+    $(this).children(".overdate").text(over_date).addClass("over");
 });
 
 

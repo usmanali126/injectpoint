@@ -79,7 +79,7 @@ and open the template in the editor.
 
                         <div class="row top-big-margin">
                             <div class="col-sm-12">
-                                <table class="table-responsive table-hover table-striped">
+                                <table class="table-responsive table-hover table-striped text-center">
                                     <thead class="table-bordered">
                                         <!--<tr><th class="col-xs-1">Sr.</th><th class="col-xs-1">Card #</th><th class="col-xs-1">Name</th><th class="col-xs-1">Date of birth</th><th class="col-xs-1">Uc.</th><th class="col-xs-1">Area</th><th class="col-xs-1">Inj-1</th><th class="col-xs-1">Inj-2</th><th class="col-xs-1">Inj-3</th><th class="col-xs-1">Inj-4</th><th class="col-xs-1">Inj-5</th><th class="col-xs-1">Inj-6</th></tr>-->
                                         <?php if (isset($result)) { ?>
@@ -99,19 +99,19 @@ and open the template in the editor.
 //                                               
                                                 if (empty($row[14]) && $days > 40) {
                                                     $date1 = TRUE;
-                                                } elseif (empty($row[15]) && $days > 45) {
+                                                } elseif (empty($row[15]) && $days > 75) {
                                                     $date2 = TRUE;
-                                                } elseif (empty($row[16]) && $days > 75) {
+                                                } elseif (empty($row[16]) && $days > 105) {
                                                     $date3 = TRUE;
-                                                } elseif (empty($row[17]) && $days > 105) {
+                                                } elseif (empty($row[17]) && $days > 270) {
                                                     $date4 = TRUE;
-                                                } elseif (empty($row[18]) && $days > 270) {
+                                                } elseif (empty($row[18]) && $days > 540) {
                                                     $date5 = TRUE;
                                                 } elseif (empty($row[19]) && $days > 540) {
                                                     $date6 = TRUE;
                                                 }
                                                 ?>
-                                                <tr><td ><?php echo $i++; ?></td><td ><a class="card-no"><?php echo $row['card_number']; ?></a></td><td ><?php echo $row['name']; ?></td><td class="date1"><?php echo $row['dob']; ?></td><td ><?php echo $days; ?></td>
+                                        <tr><td ><?php echo $i++; ?></td><td ><a class="card-no"><?php echo $row['card_number']; ?></a></td><td ><?php echo $row['name']; ?></td><td class="date1"><?php echo $row['dob']; ?></td><td ><?php echo $days; ?></td>
                                                     <td class="date2"><?php echo $row[20]; ?></td>
                                                     <td class="date2" ><?php echo $row[21]; ?></td><td class="date2 <?php
                                                     echo isset($date1) ? 'blue' : '';
@@ -125,7 +125,7 @@ and open the template in the editor.
                                                     echo isset($date5) ? 'blue' : '';
                                                     ?>"><?php echo $row[18]; ?></td><td class="date2 <?php
                                                     echo isset($date6) ? 'blue' : '';
-                                                    ?>"><?php echo $row[19]; ?></td></tr>
+                                                    ?>"><?php echo $row[19]; ?></td><td class="indate"></td><td class="overdate"></td></tr>
                                                         <?php
                                                     $date1=NULL;
                                                     $date2=NULL;

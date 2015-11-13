@@ -46,7 +46,7 @@
       </form>
        
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="index.php">Log Out</a></li>
+        <li><a href="index.php?logout=logout">Log Out</a></li>
         </ul> 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

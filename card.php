@@ -61,9 +61,13 @@ and open the template in the editor.
         <div id="nav" >
             <?php 
             require 'inc/header.php'; 
-            echo $_SESSION['name'].'<br>'.$_SESSION['type'];
+            //echo $_SESSION['name'].'<br>'.$_SESSION['type'];
+            echo session_status();
+            print_r($_SESSION);
             if(empty($_SESSION['name'])){
                 echo 'empty';
+            }else{
+                echo 'not empty';
             }
 ?>
         </div>
