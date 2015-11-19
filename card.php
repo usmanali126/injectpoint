@@ -1,46 +1,49 @@
 <?php
 require_once 'classes/inject_record.php';
-if(!isset($_SESSION['name'])){
+if (!isset($_SESSION['name'])) {
     header('Location:index.php?login=login');
 }
 if (isset($_POST['submit']) || isset($_POST['submit1'])) {
     //print_r($_POST);
-    $data='';
+    $data = '';
     foreach ($_POST as $key => $value) {
-        if($key=='mcard_number'){
-            $data[$key]= $value;
+        if ($key == 'mcard_number') {
+            if (isset($_POST['submit']) && empty($_POST[$key])) {
+                $error = 'Fill empty fields first.';
+            } else {
+                $data[$key] = $value;
+            }
+
             //exit();
-        }elseif(empty($_POST[$key])){
-            $error='Fill empty fields first.';
-        }  else {
-            $data[$key]= $value;
+        } elseif (empty($_POST[$key])) {
+            $error = 'Fill empty fields first.';
+        } else {
+            $data[$key] = $value;
         }
     }
     //echo $data[1];
     //print_r($data);
-    if(!isset($error)){
+    if (!isset($error)) {
         //echo $data['submit'];
-      $obj = new inject_record(); 
-      if(isset($data['submit']) && $data['submit'] =='submit'){
-          $token=0;
-          $result = $obj->add_card($data,$token);
-      }elseif(isset($data['submit1']) && $data['submit1']=='Submit'){
-          $token=1;
-          //echo'child submit';
-          $result = $obj->add_card($data,$token);
-      }elseif(isset($data['submit1']) && $data['submit1']=='Update'){
-          $token=2;
-          //echo'child update';
-          $result = $obj->add_card($data,$token);
-      }else{
-          echo 'error is not set';
-      }
-      //$result = $obj->add_card();
-    }else{
+        $obj = new inject_record();
+        if (isset($data['submit']) && $data['submit'] == 'submit') {
+            $token = 0;
+            $result = $obj->add_card($data,$token);
+        } elseif (isset($data['submit1']) && $data['submit1'] == 'Submit') {
+            $token = 1;
+            //echo'child submit';
+            $result = $obj->add_card($data, $token);
+        } elseif (isset($data['submit1']) && $data['submit1'] == 'Update') {
+            $token = 2;
+            //echo'child update';
+            $result = $obj->add_card($data, $token);
+        } else {
+            echo 'error is not set';
+        }
+        //$result = $obj->add_card();
+    } else {
         echo 'error is set';
     }
-    
-    
 }
 $obj = new inject_record();
 $uc_result = $obj->get_uc();
@@ -61,8 +64,8 @@ and open the template in the editor.
     <body>
         <!--<div class="container">-->
         <div id="nav" >
-            <?php 
-            require 'inc/header.php'; 
+            <?php
+            require 'inc/header.php';
 //            echo $_SESSION['type'].'<br>'.$_SESSION['name'];
 //            echo session_status();
 //            //print_r($_SESSION);
@@ -71,7 +74,7 @@ and open the template in the editor.
 //            }else{
 //                echo 'not empty';
 //            }
-?>
+            ?>
         </div>
 
         <div id="dashoard" class="container">
@@ -104,9 +107,9 @@ and open the template in the editor.
                                 <div role="tabpanel" class="tab-pane fade in active" id="mother">
                                     <form class="form-horizontal" id="mcard" role="form" method="POST" action="">
                                         <div class="col-lg-6">
-                                            <div class="form-group">
+                                            <div class="form-group" >
                                                 <label for="m_card" class="col-sm-4 control-label">Card Number</label>
-                                                <div class="col-sm-8">
+                                                <div class="col-sm-8" id="mother_card">
                                                     <input form="mcard" type="text" class="form-control" name="mcard_number" id="m_card" placeholder="Card Number">
                                                 </div>
                                             </div>
@@ -174,7 +177,7 @@ and open the template in the editor.
                                     </form>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade out" id="child">
-                                    
+
                                     <form class="form-horizontal" id="card" role="form" method="POST" action="">
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -185,7 +188,7 @@ and open the template in the editor.
                                             </div>
                                             <div class="form-group">
                                                 <label for="ccard" class="col-sm-4 control-label">Child's Card Number</label>
-                                                <div class="col-sm-8">
+                                                <div class="col-sm-8" id="child_card">
                                                     <input form="card" type="text" class="form-control" name="card_number" id="ccard" placeholder="Child's Card Number">
                                                 </div>
                                             </div>
@@ -236,7 +239,7 @@ and open the template in the editor.
                                                         while ($row = mysqli_fetch_array($uc_result)) {
                                                             ?>
                                                             <option value="<?php echo $row['number']; ?>"><?php echo $row['number']; ?> | <?php echo $row['name']; ?></option>
-<?php } ?>
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -272,5 +275,5 @@ and open the template in the editor.
         </div>
         <!-- </div>  /container -->
     </body>
-<?php require 'inc/footer.php'; ?>
+    <?php require 'inc/footer.php'; ?>
 </html>

@@ -61,6 +61,9 @@ and open the template in the editor.
                                             <button type="submit" form="search_by_area" name="search_by_area" class="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
+                                    <div class="form-group checkbox ">
+                                        <label for="mcard_number"><input type="checkbox" form="search_by_area" name="mcard_number" class="" id="mcard_number" >Mother Card Number </label>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -69,6 +72,8 @@ and open the template in the editor.
                                 echo $error;
                             }
                             ?></h4>
+                        <button class="btn btn-default pull-right" id="btn-print">Print</button>
+                        <div id="print">
                         <h4 class="pull-left">UC Number= <span class="selected_date"><?php
                                 if (isset($_POST['union'])) {
                                     echo $_POST['union'];
@@ -79,11 +84,78 @@ and open the template in the editor.
                                     echo $_POST['area'];
                                 }
                                 ?></span></h4>
-
+                            
                         <div class="row top-big-margin">
                             <div class="col-sm-12">
                                 <table class="table-responsive table-hover table-striped text-center">
-                                    <thead class="table-bordered">
+                                    <?php if(isset($_POST['mcard_number'])){ ?>
+                                <thead class="table-bordered">
+                                        <?php if (isset($result)) { ?>
+                                        <tr><th >Sr.</th><th >Card #</th><th >Name</th><th >Husband Name</th><th >EDD</th><th >Age(Days)</th><th >TT1 90-140</th><th >TT2 140-200</th><th>In Date</th><th>Over Date</th></tr>
+                                        <?php } ?>
+                                    </thead>
+                                    <tbody class="resutl">
+                                        <?php
+                                        if (isset($result)) {
+                                            $i = 1;
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                $dob = date_create($row['edd']);
+                                                $curren_date = date_create(date('d-m-Y'));
+                                                $diff = date_diff($dob, $curren_date);
+                                                //echo $diff->format("%R%a days");
+                                                $days = $diff->format("%a");
+//                                               
+                                                if (empty($row[20]) && $days > 0) {
+                                                    $opv = TRUE;
+                                                }elseif (empty($row[21]) && $days > 105) {
+                                                    $ipv = TRUE;
+                                                }
+                                                
+                                                if (empty($row[14]) && $days > 0) {
+                                                    $date1 = TRUE;
+                                                } elseif (empty($row[15]) && $days > 40) {
+                                                    $date2 = TRUE;
+                                                } elseif (empty($row[16]) && $days > 75) {
+                                                    $date3 = TRUE;
+                                                } elseif (empty($row[17]) && $days > 105) {
+                                                    $date4 = TRUE;
+                                                } elseif (empty($row[18]) && $days > 270) {
+                                                    $date5 = TRUE;
+                                                } elseif (empty($row[19]) && $days > 540) {
+                                                    $date6 = TRUE;
+                                                }
+                                                ?>
+                                        <?php if($row['m_card'] > 0) {?>
+                                        <tr><td ><?php echo $i++; ?></td><td ><a class="card-no"><?php echo $row['m_card']; ?></a></td><td ><?php echo $row['m_name']; ?></td><td ><?php echo $row['father_name']; ?></td><td class="date1"><?php echo $row['edd']; ?></td><td ><?php echo $days; ?></td>
+                                                    <td class="date2 <?php
+                                                    echo isset($opv) ? 'blue' : '';
+                                                    ?>"><?php echo $row[6]; ?></td>
+                                                    <td class="date2 <?php
+                                                    echo isset($ipv) ? 'blue' : '';
+                                                    ?>" ><?php echo $row[7]; ?></td>
+                                                    <td class="indate"></td>
+                                                    <td class="overdate"></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td><td class="bold">Remarks</td>
+                                    <td><?php echo $row[23]; ?></td>
+                                        </tr>
+                                        <?php }?>
+                                                        <?php
+                                                    $date1=NULL;
+                                                    $date2=NULL;
+                                                    $date3=NULL;
+                                                    $date4=NULL;
+                                                    $date5=NULL;
+                                                    $opv=NULL;
+                                                    $ipv=NULL;
+                                                        
+                                                }
+                                                }
+                                                ?>
+                                    </tbody>
+                                    <?php }else{ ?>
+                                <thead class="table-bordered">
                                         <!--<tr><th class="col-xs-1">Sr.</th><th class="col-xs-1">Card #</th><th class="col-xs-1">Name</th><th class="col-xs-1">Date of birth</th><th class="col-xs-1">Uc.</th><th class="col-xs-1">Area</th><th class="col-xs-1">Inj-1</th><th class="col-xs-1">Inj-2</th><th class="col-xs-1">Inj-3</th><th class="col-xs-1">Inj-4</th><th class="col-xs-1">Inj-5</th><th class="col-xs-1">Inj-6</th></tr>-->
                                         <?php if (isset($result)) { ?>
                                         <tr><th >Sr.</th><th >Card #</th><th >Name</th><th >Date of birth</th><th >Age(Days)</th><th >OPV 0-40</th><th >IPV 106-270</th><th >BCG 0-40</th><th >P1 46-75</th><th >P2 76-105</th><th >P3 106-270</th><th >M1 271-540</th><th >M2 540---</th><th>In Date</th><th>Over Date</th></tr>
@@ -148,6 +220,10 @@ and open the template in the editor.
                                                     <td class="indate"></td>
                                                     <td class="overdate"></td>
                                         </tr>
+                                        <tr>
+                                            <td></td><td class="bold">Remarks</td>
+                                    <td><?php echo $row[22]; ?></td>
+                                        </tr>
                                                         <?php
                                                     $date1=NULL;
                                                     $date2=NULL;
@@ -161,6 +237,8 @@ and open the template in the editor.
                                                 }
                                                 ?>
                                     </tbody>
+                                     <?php  } ?>
+                                    
                                     <?php /* <tfoot>
                                       <tr><td colspan="5"><h4 class="pull-left">Total Injection: <span class="selected_date"><?php
                                       if (isset($total_inject)) {
@@ -172,6 +250,7 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
+                        </div>
                 </div>
             </div>
         </div>

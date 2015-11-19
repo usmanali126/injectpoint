@@ -49,7 +49,21 @@ if (isset($_POST['mcard'])) {
     }
     exit;
 }
-
+if(isset($_POST['card'])){
+    
+    $obj = new inject_record();
+    $param = array("card" => $_POST['card'], "card_column" => $_POST['column']);
+    $result=$obj->get_info($param);
+    //echo $result;
+    //exit;
+    if(mysqli_num_rows($result)==1){
+        //echo '<span>this card no already register'.$_POST['card'].'<span>';
+        echo 0;
+        }else{
+            echo 1;
+        }
+        exit;
+}
 class inject_record {
 
     function db_connection() {
@@ -120,7 +134,16 @@ class inject_record {
             return 'try again';
         }
     }
-
+    
+    function check_card_no($param) {
+        $column=$param['card_column'];
+        $card=$param['card'];
+        $link=  $this->db_connection();
+        $query="SELSECT * FROM information WHERE $column='$card";
+        $result=  mysqli_query($link, $query) or die (mysqli_error($link));
+        return $result;
+    }
+    
     function get_info($card) {
         // print_r($card);
         $column = $card['card_column'];
@@ -141,12 +164,12 @@ class inject_record {
 
         $card = $parm[0];
         $index = $parm[1];
-        $date = $parm[2];
+        $data = $parm[2];
         $card_column = $parm[3];
         //print_r($parm);
         //exit();
 
-        $query = "UPDATE `information` SET `$index`='$date' WHERE `$card_column`='$card' ";
+        $query = "UPDATE `information` SET `$index`='$data' WHERE `$card_column`='$card' ";
 
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
         if ($result == TRUE) {

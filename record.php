@@ -7,8 +7,8 @@ if (isset($_POST['card'])) {
     //echo $_POST['card'];
 }
 if (isset($_POST['search'])) {
-    //print_r($_POST);
-    //exit();
+//    print_r($_POST);
+//    exit();
     if (empty($_POST['card_number'])) {
         $error = 'Write Mother or Child card number in search field.';
     } else {
@@ -32,10 +32,17 @@ if (isset($_POST['search'])) {
     }
 }
 if (isset($_POST['update'])) {
+//    print_r($_POST);
+//    exit();
+    $arr_size=NULL;
+    if(isset($_POST['date'])){
+      $arr_size = sizeof($_POST['date']);  
+    }
     
-    $arr_size = sizeof($_POST['date']);
     //echo $_POST['mcard_number'];
     if (isset($_POST['mcard_number'])) {
+        //echo 'if='.$_POST['mcard_number'];
+        //exit();
         switch ($arr_size) {
             case 2:
                 $index = 1;
@@ -48,15 +55,23 @@ if (isset($_POST['update'])) {
         //$token='set';
         $index='tt'.$index;
         $card_column='m_card';
+        //exit();
     } else {
-        $arr_size_opv = sizeof(isset($_POST['odate']));
-        print_r($_POST['odate']);
-        echo $arr_size_opv;
+//        echo 'else';
+//        exit();
+        $arr_size_opv=NULL;
+        if(isset($_POST['odate'])){
+            $arr_size_opv = sizeof($_POST['odate']);
+        }
+//        print_r($_POST['odate']);
+//        echo $arr_size_opv;
         switch ($arr_size_opv) {
             case 2:
                 $index_odate = 1;
                 if(!empty($_POST['odate'][0])){
                    $token=TRUE; 
+                }elseif(!empty($_POST['odate'][1])){
+                    $token=TRUE; 
                 }
                 break;
 
@@ -68,8 +83,8 @@ if (isset($_POST['update'])) {
                 break;
         }
         //$_POST['mcard_number']=NULL;
-        //echo $arr_size;
-        //exit();
+//        echo $arr_size;
+//        exit();
         switch ($arr_size) {
             case 5:
                 $index = 2;
@@ -102,10 +117,32 @@ if (isset($_POST['update'])) {
     }
 //    echo $index.'<br>';
 //    echo $card_column;
-    exit();
+//    exit();
 //    print_r($_POST);
     $i = 0;
-    while ($i < $arr_size) {
+    if(!empty($_POST['rmks'] ) && isset($_POST['rmks'])){
+//        echo $card_column;
+//        exit();
+        $rmks=$_POST['rmks'];
+        
+        if(isset($_POST['mcard_number'])){
+            $index='mremarks';
+            $card_column='m_card';
+        }else{
+           $index='remarks'; 
+           $card_column='card_number';
+        }
+//        echo $index.'<br>';
+//        echo $card_column;
+//        exit();
+        $parm = array($_POST['card_number'], $index, $rmks, $card_column);
+        $obj = new inject_record();
+        $result = $obj->update_injection($parm);
+    }else{
+    while ($i < $arr_size || $i < $arr_size_opv) {
+//        echo $index.'<br>';
+//        echo $card_column;
+//        exit();
         if (!empty($_POST['date'][$i]) || !empty($_POST['odate'][$i])) {
             if(!empty($_POST['date'][$i])){
                 $date=$_POST['date'][$i];
@@ -121,6 +158,7 @@ if (isset($_POST['update'])) {
         }
         $i++;
     }
+}
     //exit();
     if (isset($result) && $result == TRUE) {
         $data = array("card" => $_POST['card_number'], "card_column" => $card_column);
@@ -184,7 +222,7 @@ and open the template in the editor.
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group checkbox pull-right">
-                                        <label for="mcard_number"><input type="checkbox" form="search" name="mcard_number" class="" id="mcard_number" placeholder="Card Number">Mother Card Number </label>
+                                        <label for="mcard_number"><input type="checkbox" form="search" name="mcard_number" class="" id="mcard_number" >Mother Card Number </label>
                                 </div>
                             </div>
                         </div>
@@ -305,6 +343,13 @@ and open the template in the editor.
                                                 echo '<input class="inject_date date-picker" form="injection" name="date[]" placeholder="Date"></input>';
                                             }
                                             ?></div></div>
+                                    <div class="col-sm-12 top-big-margin top-border"><div class="bold">Remarks</div><div><?php
+                                            if (isset($row) && !(empty($row[23]))) {
+                                                echo $row[23];
+                                            } else {
+                                                echo '<input class=" form-control" form="injection" name="rmks" placeholder="Enter Remarks"></input>';
+                                            }
+                                            ?></div></div>
                                     <?php
                                 } else {
                                     ?>
@@ -368,9 +413,19 @@ and open the template in the editor.
                                             } else {
                                                 echo '<input class="inject_date date-picker" form="injection" name="odate[]" placeholder="Date"></input>';
                                             }
-                                            ?></div></div><?php } ?>
+                                            ?></div></div>
+                                    <div class="col-sm-12 top-big-margin top-border"><div class="bold">Remarks</div><div><?php
+                                            if (isset($row) && !(empty($row[22]))) {
+                                                echo $row[22];
+                                            } else {
+                                                echo '<input class=" form-control" form="injection" name="rmks" placeholder="Enter Remarks"></input>';
+                                            }
+                                            ?></div></div>            
+                                                
+                                                <?php } ?>
                             </form>
                         </div>
+                       
                         <div class="row top-big-margin top-border">
                             <div class="col-sm-12 top-big-margin">
                                 <button type="submit" name="update" form="injection" value="update" class="btn btn-primary pull-right">Update</button>

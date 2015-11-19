@@ -5,6 +5,12 @@
  */
 
 $(document).ready(function () {
+        $('#btn-print').on('click', function(){
+    w=window.open();
+    w.document.write($('#print').html());
+    w.print();
+    w.close();
+    });
     var area_no;
     add_datepicker();
     active_li();
@@ -34,6 +40,7 @@ $(document).ready(function () {
 $(".resutl tr").each(function(){
     var in_date=0;
     var over_date=0;
+    var counter=1;
    var date1= $(this).children(".date1").text();
     $(this).find(".date2").each(function(){
 	var date2=$(this).text();
@@ -41,34 +48,115 @@ $(".resutl tr").each(function(){
 	//console.log($(this).text());
     //console.log(date1);
     //console.log(days);
-        if(days>0){
-            if(days>=940){
-            $(this).addClass("over");
-            over_date++;
-            }else if(days>=540){
-           $(this).addClass("over");
-           over_date++;
-            }else if(days>=270){
-           $(this).addClass("over");
-           over_date++;
-            }else if(days>=105){
-           $(this).addClass("over");
-           over_date++;
-            }else if(days>=75){
-           $(this).addClass("over");
-           over_date++;
-            }else if(days>=40){
-           $(this).addClass("over");
-           over_date++;
-            }else{
-                 $(this).addClass("under");
-                 in_date++;
-            }
+//        if(days>0){
+//            if(days>=940){
+//            $(this).addClass("over");
+//            over_date++;
+//            }else if(days>=540){
+//           $(this).addClass("over");
+//           over_date++;
+//            }else if(days>=270){
+//           $(this).addClass("over");
+//           over_date++;
+//            }else if(days>=105){
+//           $(this).addClass("over");
+//           over_date++;
+//            }else if(days>=75){
+//           $(this).addClass("over");
+//           over_date++;
+//            }else if(days>=40){
+//           $(this).addClass("over");
+//           over_date++;
+//            }else{
+//                 $(this).addClass("under");
+//                 in_date++;
+//            }
+//        }
+    if(days>0){  
+     switch (counter) {
+            case 1:
+                if(days>=40){
+                    $(this).addClass("over");
+                    over_date++;
+                }else{
+                     $(this).addClass("under");
+                     in_date++;
+                }
+                break;
+            case 2:
+                if(days>=270){
+                    $(this).addClass("over");
+                    over_date++;
+                }else{
+                     $(this).addClass("under");
+                     in_date++;
+                }
+                break;
+            case 3:
+                if(days>=40){
+                    $(this).addClass("over");
+                    over_date++;
+                }else{
+                     $(this).addClass("under");
+                     in_date++;
+                }
+                break;
+            case 4:
+                if(days>=75){
+                    $(this).addClass("over");
+                    over_date++;
+                }else{
+                     $(this).addClass("under");
+                     in_date++;
+                }
+                break;
+            case 5:
+                if(days>=105){
+                    $(this).addClass("over");
+                    over_date++;
+                }else{
+                     $(this).addClass("under");
+                     in_date++;
+                }
+                break;
+            case 6:
+                if(days>=270){
+                    $(this).addClass("over");
+                    over_date++;
+                }else{
+                     $(this).addClass("under");
+                     in_date++;
+                }
+                break;
+            case 7:
+                if(days>=540){
+                    $(this).addClass("over");
+                    over_date++;
+                }else{
+                     $(this).addClass("under");
+                     in_date++;
+                }
+                break;
+            case 8:
+                if(days>=940){
+                    $(this).addClass("over");
+                    over_date++;
+                }else{
+                     $(this).addClass("under");
+                     in_date++;
+                }
+                break;
+
+            default:
+                
+                break;
         }
+    }
+        counter++;
         
     });
-    console.log(in_date);
-    console.log(over_date);
+    //console.log(in_date);
+    //console.log(over_date);
     $(this).children(".indate").text(in_date).addClass("under");
     $(this).children(".overdate").text(over_date).addClass("over");
 });
@@ -79,6 +167,33 @@ $(".resutl tr").each(function(){
 //        e.preventDefault()
 //        $(this).tab('show')
 //    });
+});
+// ajax for check mother's card already exist or not
+$('#m_card').on('blur', function(){
+    var card=$(this).val();
+    $.ajax({
+        url:'classes/inject_record.php',
+        type:'POST',
+        data:{card:card, column:'m_card'},
+        success:function(result){
+            console.log(result);
+            if(result!=0){
+               console.log('Card not found');
+               $(".text-danger").remove();
+               $(".text-success").remove();
+               $('<span class="text-success">'+card+' card number accepted</span>').appendTo("#mother_card");
+            }else{
+                $(".text-danger").remove();
+               $(".text-success").remove();
+                 //$(result).appendTo('#m_card');
+                 $('<span class="text-danger">'+card+' card number already register</span>').appendTo("#mother_card");
+                 $("#m_card").val("");
+                //console.log('Card found');
+                alert('Try again');
+            }
+        }
+    });
+    //alert(card);
 });
 //ajax for getting mother's data
 $('#m_card1').on('blur', function () {
@@ -145,17 +260,35 @@ var y = Math.round(d / days);
 
 $('#ccard').blur(function () {
     //alert(area_no);
-    $('#area1 option[value="' + area_no + '"]').attr("selected", "");
+    
      if ($('#m_card1').val() !=='') {
+         $('#area1 option[value="' + area_no + '"]').attr("selected", "");
          $('#area1').attr("readonly", "");
      }
-    
-//    $('#area1 option').each(function(){
-//                console.log($(this).val());
-////                if($(this).val()==uc){
-////                    $(this).attr("selected","");
-////                }
-//            });
+     
+var card=$(this).val();
+    $.ajax({
+        url:'classes/inject_record.php',
+        type:'POST',
+        data:{card:card, column:'card_number'},
+        success:function(result){
+            console.log(result);
+            if(result!=0){
+               console.log('Card not found');
+               $(".text-danger").remove();
+               $(".text-success").remove();
+               $('<span class="text-success">'+card+' card number accepted</span>').appendTo("#child_card");
+            }else{
+                $(".text-danger").remove();
+               $(".text-success").remove();
+                 //$(result).appendTo('#m_card');
+                 $('<span class="text-danger">'+card+' card number already register</span>').appendTo("#child_card");
+                 $("#ccard").val("");
+                //console.log('Card found');
+                alert('Try again');
+            }
+        }
+    });
 });
 
 //ajax for getting area of the selected union
