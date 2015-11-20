@@ -179,10 +179,11 @@ class inject_record {
         }
     }
 
-    function report() {
+    function report($date) {
         $link = $this->db_connection();
-        $date = $_POST['date'];
-        $query = "SELECT * FROM information WHERE 1_inj='$date' OR 2_inj='$date' OR 3_inj='$date' OR 4_inj='$date' OR 5_inj='$date' OR 6_inj='$date' ";
+        //echo $date;
+        //exit;
+        $query = "SELECT * FROM information WHERE 1_inj LIKE '$date' OR 2_inj LIKE '$date' OR 3_inj LIKE '$date' OR 4_inj LIKE '$date' OR 5_inj LIKE '$date' OR 6_inj LIKE '$date' ";
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
         if ($result == TRUE) {
             return $result;

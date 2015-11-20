@@ -5,7 +5,10 @@ if(!isset($_SESSION['name'])){
 }
 if (isset($_POST['date_search'])) {
     $obj = new inject_record();
-    $result = $obj->report();
+    $date = $_POST['date'];
+    //echo '%'.$date;
+    //exit;
+    $result = $obj->report('%'.$date);
     $total_inject=  mysqli_num_rows($result);
     //$row = mysqli_fetch_array($result);
     //print_r($row);
@@ -40,7 +43,7 @@ and open the template in the editor.
                                     <form class="form-inline" id="date_search" action="" method="POST">
                                         <div class="form-group">
                                             <label for="serch_date">Enter Card Number</label>
-                                            <input type="text" required="" form="date_search" name="date" class="form-control date-picker" id="serch_date" placeholder="Select Date">
+                                            <input type="text" required="" form="date_search" name="date" class="form-control " id="serch_date" placeholder="Select Date">
                                         </div>
                                         <button type="submit" form="date_search" name="date_search" class="btn btn-success">Submit</button>
                                     </form>
@@ -51,7 +54,7 @@ and open the template in the editor.
                                     echo $error;
                                 }
                                 ?></h4>
-                            <h4 class="pull-left">Selected Date: <span class="selected_date"><?php
+                            <h4 class="pull-left">Selected Month: <span class="selected_date"><?php
                                 if (isset($_POST['date'])) {
                                     echo $_POST['date'];
                                 }
@@ -68,6 +71,9 @@ and open the template in the editor.
                                             if(isset($result)){
                                             $i = 1;
                                             while ($row = mysqli_fetch_array($result)) {
+                                                //print_r($row);
+                                                //echo $row[9];
+                                                //exit();
                                                 if($_POST['date']== $row[9]){
                                                     $date1=$row[9];
                                                 }else{
@@ -100,8 +106,10 @@ and open the template in the editor.
                                                 }
                                                 
                                                 ?>
-                                                <tr><td class="col-xs-1"><?php echo $i++; ?></td><td class="col-xs-1"><?php echo $row[3]; ?></td><td class="col-xs-1"><?php echo $row[4]; ?></td><td class="col-xs-1"><?php echo $row[1]; ?></td><td class="col-xs-1"><?php echo $row[2]; ?></td><td class="col-xs-1"><?php echo $date1 ?></td><td class="col-xs-1"><?php echo $date2; ?></td><td class="col-xs-1"><?php echo $date3; ?></td><td class="col-xs-1"><?php echo $date4; ?></td><td class="col-xs-1"><?php echo $date5; ?></td><td class="col-xs-1"><?php echo $date6; ?></td></tr>
-                                            <?php }}
+                                                <tr><td class="col-xs-1"><?php echo $i++; ?></td><td class="col-xs-1"><?php echo $row[3]; ?></td><td class="col-xs-1"><?php echo $row[4]; ?></td><td class="col-xs-1"><?php echo $row[1]; ?></td><td class="col-xs-1"><?php echo $row[2]; ?></td><td class="col-xs-1 <?php echo $date1 ?>"><?php echo $row['1_inj'] ?></td><td class="col-xs-1 <?php echo $date2; ?>"><?php echo $row['2_inj'] ?></td><td class="col-xs-1 <?php echo $date3; ?>"><?php echo $row['3_inj'] ?></td><td class="col-xs-1 <?php echo $date4; ?>"><?php echo $row['4_inj'] ?></td><td class="col-xs-1 <?php echo $date5; ?>"><?php echo $row['5_inj'] ?></td><td class="col-xs-1 <?php echo $date6; ?>"><?php echo $row['6_inj'] ?></td></tr>
+                                            <?php }
+                                            
+                                                }
                                                     ?>
                                         </tbody>
                                         <tfoot>
@@ -121,4 +129,25 @@ and open the template in the editor.
         </div> <!-- /container -->
     </body>
     <?php require 'inc/footer.php'; ?>
+    <script>
+    $('#serch_date').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'mm-yy',
+        onClose: function(dateText, inst) { 
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, month, 1));
+        }
+    });
+</script>
+    <style>
+.ui-datepicker-calendar {
+    display: none;
+    }
+    .ui-priority-secondary{
+    display: none
+    }
+</style>
 </html>
