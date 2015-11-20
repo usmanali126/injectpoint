@@ -6,10 +6,7 @@
 
 $(document).ready(function () {
         $('#btn-print').on('click', function(){
-    w=window.open();
-    w.document.write($('#print').html());
-    w.print();
-    w.close();
+    $("#table-print").printMe({ "path": "inc/css/bootstrap.min.css" });
     });
     var area_no;
     add_datepicker();

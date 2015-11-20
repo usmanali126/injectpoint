@@ -87,7 +87,7 @@ and open the template in the editor.
                             
                         <div class="row top-big-margin">
                             <div class="col-sm-12">
-                                <table class="table-responsive table-hover table-striped text-center">
+                                <table class="table-responsive table-hover table-striped text-center" id="table-print">
                                     <?php if(isset($_POST['mcard_number'])){ ?>
                                 <thead class="table-bordered">
                                         <?php if (isset($result)) { ?>
