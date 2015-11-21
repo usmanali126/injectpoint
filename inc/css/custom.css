@@ -38,8 +38,8 @@ table{
     animation-name: blue;
     animation-iteration-count: infinite;
     animation-timing-function: steps(2, start);
-/*    width:50px;
-    height:50px;*/
+    /*    width:50px;
+        height:50px;*/
     //border:1px solid #1c94c4;
 }
 @keyframes blue {
@@ -112,9 +112,9 @@ color: #b47305;
 }*/
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
-background-color: #fff;
-border-color: #337ab7 #337ab7 transparent;
-color: #000;
+    background-color: #fff;
+    border-color: #337ab7 #337ab7 transparent;
+    color: #000;
 }
 .nav-tabs > li > a:hover {
     border-color: #eee #eee #337ab7;
@@ -166,3 +166,26 @@ div .singin {
     border-top-right-radius: 0;
 }
 
+@media print {
+    //.onlyprint {display: block;}
+    .no-print{
+        //display: none;
+    }
+    #table-print{
+       // display: block;
+    }
+    #print .panel-title{
+        display: block;
+    }
+}
+@media screen{
+    .no-print{
+        //display: block;
+    }
+    #table-print{
+        //display: none;
+    }
+    #print h3.panel-title {
+    display: none;
+}
+}

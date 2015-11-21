@@ -6,7 +6,19 @@
 
 $(document).ready(function () {
         $('#btn-print').on('click', function(){
-    $("#table-print").printMe({ "path": "inc/css/bootstrap.min.css" });
+            //alert('click on print button');
+            $("body").find('#dashoard').removeClass('container');
+            $("#print").find('table').removeClass('table-striped');
+            //$("#print").find('table').removeClass('table-responsive');
+            $("#print").find('table').removeClass('table-hover');
+            $("#print").find('table').addClass('table-bordered' );
+            $("#print").find('table').addClass('table' );
+    $("#print").printMe({ "path": "inc/css/bootstrap.min.css" });
+    $("body").find('#dashoard').addClass('container');
+    $("#print").find('table').removeClass('table-bordered');
+    $("#print").find('table').removeClass('table');
+    $("#print").find('table').addClass('table-striped' );
+    $("#print").find('table').addClass('table-striped' );
     });
     var area_no;
     add_datepicker();
