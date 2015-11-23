@@ -13,7 +13,7 @@ if (isset($_POST['date_search'])) {
     $result = $obj->report('%' . $date);
     $total_inject = mysqli_num_rows($result);
     while ($row = mysqli_fetch_array($result)) {
-        //'/'.$date.'/'=$date;
+        // print_r($row);
         if (preg_match('/' . $date . '/', $row['opv1'])) {
             $opv++;
         }
@@ -64,66 +64,66 @@ and open the template in the editor.
     </head>
     <body>
         <!--<div class="container">-->
-            <div id="nav" class="top-margin row">
-                <?php require 'inc/header.php'; ?>
-            </div>
+        <div id="nav" class="top-margin row">
+            <?php require 'inc/header.php'; ?>
+        </div>
 
-            <div id="dashoard" class="container no-print">
-                <div class="row">
-                    <div class="panel panel-primary ">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Monthly Report</h3>
+        <div id="dashoard" class="container no-print">
+            <div class="row">
+                <div class="panel panel-primary ">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Monthly Report</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12 left-margin">
+                                <form class="form-inline" id="date_search" action="" method="POST">
+                                    <div class="form-group">
+                                        <label for="serch_date">Enter Card Number</label>
+                                        <input type="text" required="" form="date_search" name="date" class="form-control " id="serch_date" placeholder="Select Date">
+                                    </div>
+                                    <button type="submit" form="date_search" name="date_search" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12 left-margin">
-                                    <form class="form-inline" id="date_search" action="" method="POST">
-                                        <div class="form-group">
-                                            <label for="serch_date">Enter Card Number</label>
-                                            <input type="text" required="" form="date_search" name="date" class="form-control " id="serch_date" placeholder="Select Date">
-                                        </div>
-                                        <button type="submit" form="date_search" name="date_search" class="btn btn-primary">Submit</button>
-                                    </form>
+
+                        <button class="btn btn-default pull-right" id="btn-print">Print</button>
+                        <div id="print">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Monthly Report</h3>
+
+                                <h4 class="">Report Month <span class="selected_date"><?php
+                                        if (isset($_POST['date'])) {
+                                            echo $_POST['date'];
+                                        }
+                                        ?></span>
+                                </h4>
+                            </div>
+                            <div class="row top-big-margin">
+                                <div class="col-sm-12">
+                                    <table class="table-responsive table-hover table-striped text-center">
+                                        <thead class="table-bordered">
+                                            <tr><th class="col-xs-2" colspan="2">Total Consumption </th><th class="col-xs-1">OPV</th><th class="col-xs-1">IPV</th><th class="col-xs-1">BCG</th><th class="col-xs-1">P1</th><th class="col-xs-1">P2</th><th class="col-xs-1">P3</th><th class="col-xs-1">M1</th><th class="col-xs-1">M2</th><th class="col-xs-1">TT1</th><th class="col-xs-1">TT2</th></tr>
+                                        </thead>
+                                        <tbody class="resutl">
+                                            <?php
+                                            if (isset($result)) {
+                                                ?>
+                                                <tr><td colspan="2"><?php echo $total; ?> </td><td class="col-xs-1"><?php echo $opv; ?> </td><td class="col-xs-1"><?php echo $ipv; ?></td><td class="col-xs-1"><?php echo $bcg; ?></td><td class="col-xs-1 "><?php echo $p1 ?></td><td class="col-xs-1 "><?php echo $p2 ?></td><td class="col-xs-1"><?php echo $p3 ?></td><td class="col-xs-1"><?php echo $m1 ?></td><td class="col-xs-1"><?php echo $m2 ?></td><td class="col-xs-1"><?php echo $tt1 ?></td><td class="col-xs-1"><?php echo $tt2 ?></td></tr>
+                                            <?php }
+                                            ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            
-                            <button class="btn btn-default pull-right" id="btn-print">Print</button>
-                            <div id="print">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Monthly Report</h3>
-
-                                    <h4 class="">Report Month <span class="selected_date"><?php
-                                            if (isset($_POST['date'])) {
-                                                echo $_POST['date'];
-                                            }
-                                            ?></span>
-                                    </h4>
-                                </div>
-                                <div class="row top-big-margin">
-                                    <div class="col-sm-12">
-                                        <table class="table-responsive table-hover table-striped text-center">
-                                            <thead class="table-bordered">
-                                                <tr><th class="col-xs-2" colspan="2">Total Consumption </th><th class="col-xs-1">OPV</th><th class="col-xs-1">IPV</th><th class="col-xs-1">BCG</th><th class="col-xs-1">P1</th><th class="col-xs-1">P2</th><th class="col-xs-1">P3</th><th class="col-xs-1">M1</th><th class="col-xs-1">M2</th><th class="col-xs-1">TT1</th><th class="col-xs-1">TT2</th></tr>
-                                            </thead>
-                                            <tbody class="resutl">
-                                                <?php
-                                                if (isset($result)) {
-                                                    ?>
-                                                    <tr><td colspan="2"><?php echo $total; ?> </td><td class="col-xs-1"><?php echo $opv; ?> </td><td class="col-xs-1"><?php echo $ipv; ?></td><td class="col-xs-1"><?php echo $bcg; ?></td><td class="col-xs-1 "><?php echo $p1 ?></td><td class="col-xs-1 "><?php echo $p2 ?></td><td class="col-xs-1"><?php echo $p3 ?></td><td class="col-xs-1"><?php echo $m1 ?></td><td class="col-xs-1"><?php echo $m2 ?></td><td class="col-xs-1"><?php echo $tt1 ?></td><td class="col-xs-1"><?php echo $tt2 ?></td></tr>
-                                                <?php }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="panel-heading">
-                                    <p class="panel-title">This is a Computer generated  Report (This software design and developed by www.reccatech.com)</p>
-                                </div>
+                            <div class="panel-heading">
+                                <p class="panel-title">This is a Computer generated  Report (This software design and developed by www.reccatech.com)</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         <!-- </div> /container -->
     </body>
     <?php require 'inc/footer.php'; ?>

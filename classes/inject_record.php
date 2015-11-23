@@ -183,7 +183,7 @@ class inject_record {
         $link = $this->db_connection();
         //echo $date;
         //exit;
-        $query = "SELECT * FROM information WHERE 1_inj LIKE '$date' OR 2_inj LIKE '$date' OR 3_inj LIKE '$date' OR 4_inj LIKE '$date' OR 5_inj LIKE '$date' OR 6_inj LIKE '$date' ";
+        $query = "SELECT * FROM information WHERE 1_inj LIKE '$date' OR 2_inj LIKE '$date' OR 3_inj LIKE '$date' OR 4_inj LIKE '$date' OR 5_inj LIKE '$date' OR 6_inj LIKE '$date' OR tt1 LIKE '$date' OR tt2 LIKE '$date' OR opv1 LIKE '$date' OR opv2 LIKE '$date'";
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
         if ($result == TRUE) {
             return $result;

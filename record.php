@@ -205,7 +205,7 @@ and open the template in the editor.
                                 <form class=" form-inline" id="search" action="" method="POST">
                                     <div class="form-group">
                                         <label for="card_number">Card Number</label>
-                                        <input type="text" form="search" name="card_number" class="form-control" id="card_number" placeholder="Card Number">
+                                        <input type="text" required="" form="search" name="card_number" class="form-control" id="card_number" placeholder="Card Number">
                                     </div>
                                     <button type="submit" form="search" name="search" class="btn btn-primary ">Search</button>
                                 </form>

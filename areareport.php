@@ -141,9 +141,9 @@ and open the template in the editor.
                                                     <td class="indate"></td>
                                                     <td class="overdate"></td>
                                         </tr>
-                                        <tr>
-                                            <td></td><td class="bold">Remarks</td>
-                                    <td><?php echo $row[23]; ?></td>
+                                        <tr class="text-left">
+                                            <td class="bold" colspan="2">Remarks</td>
+                                            <td colspan="13"><?php echo $row[23]; ?></td>
                                         </tr>
                                         <?php }?>
                                                         <?php
@@ -225,9 +225,9 @@ and open the template in the editor.
                                                     <td class="indate"></td>
                                                     <td class="overdate"></td>
                                         </tr>
-                                        <tr>
-                                            <td></td><td class="bold">Remarks</td>
-                                    <td><?php echo $row[22]; ?></td>
+                                        <tr class="text-left">
+                                            <td class="bold" colspan="2">Remarks</td>
+                                            <td colspan="13"><?php echo $row[22]; ?></td>
                                         </tr>
                                                         <?php
                                                     $date1=NULL;
@@ -254,6 +254,9 @@ and open the template in the editor.
                                 </table>
                             </div>
                         </div>
+                            <div class="panel-heading">
+                                    <p class="panel-title">This is a Computer generated  Report (This software design and developed by www.reccatech.com)</p>
+                                </div>
                     </div>
                         </div>
                 </div>

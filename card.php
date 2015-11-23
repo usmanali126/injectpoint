@@ -110,25 +110,25 @@ and open the template in the editor.
                                             <div class="form-group" >
                                                 <label for="m_card" class="col-sm-4 control-label">Card Number</label>
                                                 <div class="col-sm-8" id="mother_card">
-                                                    <input form="mcard" type="text" class="form-control" name="mcard_number" id="m_card" placeholder="Card Number">
+                                                    <input form="mcard" required="" type="number" class="form-control" name="mcard_number" id="m_card" placeholder="Card Number">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="wname" class="col-sm-4 control-label">Woman Name</label>
                                                 <div class="col-sm-8">
-                                                    <input form="mcard" type="text" class="form-control" name="wname" id="wname" placeholder="Woman Name">
+                                                    <input required="" form="mcard" type="text" class="form-control" name="wname" id="wname" placeholder="Woman Name">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="hname" class="col-sm-4 control-label">Husband Name</label>
                                                 <div class="col-sm-8">
-                                                    <input form="mcard" type="text" class="form-control" name="hname" id="hname" placeholder="Husband Name">
+                                                    <input form="mcard" required="" type="text" class="form-control" name="hname" id="hname" placeholder="Husband Name">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="edd" class="col-sm-4 control-label">EDD</label>
                                                 <div class="col-sm-8">
-                                                    <input form="mcard" type="text" class="form-control date-picker" name="edd" id="edd" placeholder="Expected Date">
+                                                    <input form="mcard" required="" type="text" class="form-control date-picker" name="edd" id="edd" placeholder="Expected Date">
                                                 </div>
                                             </div>
                                             <!--</form>-->
@@ -140,14 +140,14 @@ and open the template in the editor.
                                             <div class="form-group">
                                                 <label for="cell" class="col-sm-4 control-label">Cell Number</label>
                                                 <div class="col-sm-8">
-                                                    <input form="mcard" type="text" class="form-control" name="cell" id="cell" placeholder="Cell Number">
+                                                    <input form="mcard" required="" type="number" class="form-control" name="cell" id="cell" placeholder="Cell Number">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="u_council" class="col-sm-4 control-label">Union Council Number</label>
                                                 <div class="col-sm-8">
-                                                    <select form="mcard" id="u_council" name="union" class="form-control u_council">
-                                                        <option disabled="" selected="">Select Uc Number</option>
+                                                    <select form="mcard" required="" id="u_council" name="union" class="form-control u_council">
+                                                        <option disabled="" value="" selected="">Select Uc Number</option>
                                                         <?php while ($row = mysqli_fetch_array($uc_result)) { ?>
                                                             <option value="<?php echo $row['number']; ?>"><?php echo $row['number']; ?> | <?php echo $row['name']; ?></option>
                                                         <?php } ?>
@@ -157,15 +157,15 @@ and open the template in the editor.
                                             <div class="form-group">
                                                 <label for="area" class="col-sm-4 control-label">Area Number</label>
                                                 <div class="col-sm-8">
-                                                    <select form="mcard" id="area" name="area" class="form-control area">
-                                                        <option disabled="" selected="">Select Area Number</option>
+                                                    <select form="mcard" required="" id="area" name="area" class="form-control area">
+                                                        <option disabled="" value="" selected="">Select Area Number</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="address" class="col-sm-4 control-label">Address</label>
                                                 <div class="col-sm-8">
-                                                    <input form="mcard" type="text" class="form-control" name="address" id="address" placeholder="Address">
+                                                    <input form="mcard" required="" type="text" class="form-control" name="address" id="address" placeholder="Address">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -189,25 +189,25 @@ and open the template in the editor.
                                             <div class="form-group">
                                                 <label for="ccard" class="col-sm-4 control-label">Child's Card Number</label>
                                                 <div class="col-sm-8" id="child_card">
-                                                    <input form="card" type="text" class="form-control" name="card_number" id="ccard" placeholder="Child's Card Number">
+                                                    <input form="card" required="" type="number" class="form-control" name="card_number" id="ccard" placeholder="Child's Card Number">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-4 control-label">Child Name</label>
                                                 <div class="col-sm-8">
-                                                    <input form="card" type="text" class="form-control" name="name" id="name" placeholder="Child Name">
+                                                    <input form="card" required="" type="text" class="form-control" name="name" id="name" placeholder="Child Name">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="mname" class="col-sm-4 control-label">Mother Name</label>
                                                 <div class="col-sm-8">
-                                                    <input form="card" type="text" class="form-control" name="wname" id="mname" placeholder="Mother Name">
+                                                    <input form="card" required="" type="text" class="form-control" name="wname" id="mname" placeholder="Mother Name">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="fname" class="col-sm-4 control-label">Father Name</label>
                                                 <div class="col-sm-8">
-                                                    <input form="card" type="text" class="form-control" name="fname" id="fname" placeholder="Father Name">
+                                                    <input form="card" required="" type="text" class="form-control" name="fname" id="fname" placeholder="Father Name">
                                                 </div>
                                             </div>
                                             <!--</form>-->
@@ -220,20 +220,20 @@ and open the template in the editor.
                                             <div class="form-group">
                                                 <label for="dob" class="col-sm-4 control-label">Date Of Birth</label>
                                                 <div class="col-sm-8">
-                                                    <input form="card" type="text" class="form-control date-picker" name="dob" id="dob" placeholder="Date of Birth">
+                                                    <input form="card" required="" type="text" class="form-control date-picker" name="dob" id="dob" placeholder="Date of Birth">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="c_cell" class="col-sm-4 control-label">Father Cell Number</label>
                                                 <div class="col-sm-8">
-                                                    <input form="card" type="text" class="form-control" name="cell" id="c_cell" placeholder="Father Cell Number">
+                                                    <input form="card" required="" type="number" class="form-control" name="cell" id="c_cell" placeholder="Father Cell Number">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="u_council1" class="col-sm-4 control-label">Union Council Number</label>
                                                 <div class="col-sm-8">
-                                                    <select form="card" id="u_council1" name="union" class="form-control u_council">
-                                                        <option disabled="" selected="">Select Uc Number</option>
+                                                    <select form="card" required="" id="u_council1" name="union" class="form-control u_council">
+                                                        <option disabled="" value="" selected="">Select Uc Number</option>
                                                         <?php
                                                         mysqli_data_seek($uc_result, 0);
                                                         while ($row = mysqli_fetch_array($uc_result)) {
@@ -246,15 +246,15 @@ and open the template in the editor.
                                             <div class="form-group">
                                                 <label for="area1" class="col-sm-4 control-label">Area Number</label>
                                                 <div class="col-sm-8">
-                                                    <select form="card" id="area1" name="area" class="form-control area">
-                                                        <option disabled="" selected="">Select Area Number</option>
+                                                    <select form="card" required="" id="area1" name="area" class="form-control area">
+                                                        <option disabled="" value="" selected="">Select Area Number</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="address1" class="col-sm-4 control-label">Address</label>
                                                 <div class="col-sm-8">
-                                                    <input form="card" type="text" class="form-control" name="address" id="address1" placeholder="Address">
+                                                    <input form="card" required="" type="text" class="form-control" name="address" id="address1" placeholder="Address">
                                                 </div>
                                             </div>
                                             <div class="form-group">

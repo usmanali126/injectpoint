@@ -42,9 +42,9 @@ and open the template in the editor.
                 <form class="form-signin" method="POST" action="">
                 <h2 class="form-signin-heading">Please sign in</h2>
                 <label for="user" class="sr-only-focusable">User Name</label>
-                <input type="text" id="user" name="user_name" class="form-control" placeholder="User Name"  autofocus>
+                <input type="text" required="" id="user" name="user_name" class="form-control" placeholder="User Name"  autofocus>
                 <label for="inputPassword" class="sr-only-focusable">Password</label>
-                <input type="password" id="inputPassword" name="user_password" class="form-control" placeholder="Password" >
+                <input type="password" required="" id="inputPassword" name="user_password" class="form-control" placeholder="Password" >
                 <?php if(isset($error) || isset($blank)){?>
                 <h4 class="text-danger">User name or password is invalid</h4>
                 <?php }?>
@@ -55,7 +55,9 @@ and open the template in the editor.
                 <h4 class="text-danger">Sign In First</h4>
                 <?php }?>
                 <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
-            </form>
+                <br><p class="text-center">Powered by www.reccatech.com / Usman Ali / 03324153316</p>
+                </form>
+                
             </div>
         </div> <!-- /container -->
     </body>
