@@ -240,7 +240,7 @@ class inject_record {
         $query = "INSERT INTO area VALUE('NULL','$uc','$name','$number','$hw_name')";
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
         if ($result == TRUE) {
-            return 'Area Number= ' . $number . ' Added';
+            return 'Area Number= ' . $number . ' Added in U.C '.$uc;
             ;
         } else {
             return 'try again';

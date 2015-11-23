@@ -10,8 +10,9 @@ if (isset($_POST['date_search'])) {
     //exit;
     $result = $obj->report('%'.$date);
     $total_inject=  mysqli_num_rows($result);
-    //$row = mysqli_fetch_array($result);
-    //print_r($row);
+    $row = mysqli_fetch_array($result);
+    print_r($row);
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -64,7 +65,7 @@ and open the template in the editor.
                                 <div class="col-sm-12">
                                     <table class="table-responsive table-hover table-striped">
                                         <thead class="table-bordered">
-                                            <tr><th class="col-xs-1">Sr.</th><th class="col-xs-1">Card #</th><th class="col-xs-1">Name</th><th class="col-xs-1">Uc.</th><th class="col-xs-1">Area</th><th class="col-xs-1">Inj-1</th><th class="col-xs-1">Inj-2</th><th class="col-xs-1">Inj-3</th><th class="col-xs-1">Inj-4</th><th class="col-xs-1">Inj-5</th><th class="col-xs-1">Inj-6</th></tr>
+                                            <tr><th class="col-xs-1">Sr.</th><th class="col-xs-1">Card #</th><th class="col-xs-1">Name</th><th class="col-xs-1">Uc.</th><th class="col-xs-1">Area</th><th class="col-xs-1">OPV</th><th class="col-xs-1">IPV</th><th class="col-xs-1">BCG</th><th class="col-xs-1">P1</th><th class="col-xs-1">P2</th><th class="col-xs-1">P3</th><th class="col-xs-1">M1</th><th class="col-xs-1">M2</th></tr>
                                         </thead>
                                         <tbody class="resutl">
                                             <?php

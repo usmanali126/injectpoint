@@ -20,6 +20,8 @@ $(document).ready(function () {
     $("#print").find('table').addClass('table-striped' );
     $("#print").find('table').addClass('table-striped' );
     });
+    
+    
     var area_no;
     add_datepicker();
     active_li();
@@ -54,33 +56,7 @@ $(".resutl tr").each(function(){
     $(this).find(".date2").each(function(){
 	var date2=$(this).text();
      var days=date_diff(date1,date2);   
-	//console.log($(this).text());
-    //console.log(date1);
-    //console.log(days);
-//        if(days>0){
-//            if(days>=940){
-//            $(this).addClass("over");
-//            over_date++;
-//            }else if(days>=540){
-//           $(this).addClass("over");
-//           over_date++;
-//            }else if(days>=270){
-//           $(this).addClass("over");
-//           over_date++;
-//            }else if(days>=105){
-//           $(this).addClass("over");
-//           over_date++;
-//            }else if(days>=75){
-//           $(this).addClass("over");
-//           over_date++;
-//            }else if(days>=40){
-//           $(this).addClass("over");
-//           over_date++;
-//            }else{
-//                 $(this).addClass("under");
-//                 in_date++;
-//            }
-//        }
+	
     if(days>0){  
      switch (counter) {
             case 1:
