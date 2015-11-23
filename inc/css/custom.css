@@ -185,7 +185,7 @@ div .singin {
     #table-print{
         //display: none;
     }
-    #print h3.panel-title {
+    #print h3.panel-title, #print p.panel-title {
     display: none;
 }
 }

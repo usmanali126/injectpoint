@@ -31,7 +31,7 @@
         <li><a href="area.php">Add Area</a></li>
         <li class="dropdown"><a href="report.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Report <span class="caret"></span></a>
         <ul class="dropdown-menu">
-            <li><a href="report.php">Date wise report</a></li>
+            <li><a href="report.php">Monthly report</a></li>
             <li><a href="areareport.php">Area wise report</a></li>
           </ul></li>
      </ul>
